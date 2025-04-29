@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" style="display: none;">
+        <button id="websiteButton">Visit Our Website</button>
+        <button id="closeButton">Close</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const websiteButton = document.getElementById('websiteButton');
+            const closeButton = document.getElementById('closeButton');
+
+            if (websiteButton && closeButton) {
+                websiteButton.addEventListener('click', () => {
+                    window.invokeNative('openUrl', 'https://yourwebsite.com');
+                });
+
+                closeButton.addEventListener('click', () => {
+                    fetch(`https://${GetParentResourceName()}/exit`, { method: 'POST' })
+                        .then(resp => resp.json()).then(resp => console.log(resp));
+                });
+            }
+        
+            window.addEventListener('message', (event) => {
+                if (event.data.type === 'ui') {
+                    const visibility = event.data.status ? 'block' : 'none';
+                    document.getElementById('container').style.display = visibility;
+
+                    if (event.data.status) {
+                        document.body.classList.add('ui-active');
+                    } else {
+                        document.body.classList.remove('ui-active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

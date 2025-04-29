@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+#container {
+    display: none;
+    background-color: #282c34;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+body.ui-active {
+    background-color: rgba(0, 0, 0, 0.5); /* Set this effect to happen only when the UI is active */
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
